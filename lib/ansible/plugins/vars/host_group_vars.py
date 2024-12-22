@@ -136,7 +136,11 @@ class VarsModule(BaseVarsPlugin):
 
                     if os.path.isdir(opath):
                         self._display.debug("\tprocessing dir %s" % opath)
-                        FOUND[key] = found_files = loader.find_vars_files(opath, entity_name)
+                        if cache:
+                            key = '%s.%s' % (entity_name, opath)
+                            FOUND[key] = found_files = loader.find_vars_files(opath, entity_name)
+                        else:
+                            found_files = loader.find_vars_files(opath, entity_name)
                     elif not os.path.exists(opath):
                         # cache missing dirs so we don't have to keep looking for things beneath the
                         NAK.add(opath)

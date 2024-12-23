@@ -144,10 +144,12 @@ class VarsModule(BaseVarsPlugin):
                     elif not os.path.exists(opath):
                         # cache missing dirs so we don't have to keep looking for things beneath the
                         NAK.add(opath)
+                        found_files = []
                     else:
                         self._display.warning("Found %s that is not a directory, skipping: %s" % (subdir, opath))
                         # cache non-directory matches
                         NAK.add(opath)
+                        found_files = []
 
                     data = self.load_found_files(loader, data, found_files)
 

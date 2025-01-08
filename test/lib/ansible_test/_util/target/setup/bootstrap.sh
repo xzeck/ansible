@@ -154,6 +154,7 @@ bootstrap_remote_freebsd()
         py${python_package_version}-sqlite3
         py${python_package_version}-setuptools
         bash
+        ca_root_nss
         curl
         gtar
         sudo
@@ -162,19 +163,17 @@ bootstrap_remote_freebsd()
     if [ "${controller}" ]; then
         jinja2_pkg="py${python_package_version}-jinja2"
         cryptography_pkg="py${python_package_version}-cryptography"
-        pyyaml_pkg="py${python_package_version}-yaml"
+        pyyaml_pkg="py${python_package_version}-pyyaml"
         packaging_pkg="py${python_package_version}-packaging"
 
         # Declare platform/python version combinations which do not have supporting OS packages available.
         # For these combinations ansible-test will use pip to install the requirements instead.
         case "${platform_version}/${python_version}" in
             13.4/3.11)
-                # defaults available
+                pyyaml_pkg="py${python_package_version}-yaml"  # older naming scheme
                 ;;
-            14.1/3.11)
-                cryptography_pkg=""  # not available
-                jinja2_pkg=""  # not available
-                pyyaml_pkg=""  # not available
+            14.2/3.11)
+                # defaults available
                 ;;
             *)
                 # just assume nothing is available

@@ -1,4 +1,4 @@
 # Filename: changelogs/fragments/84384-fix-undefined-key-host-group-vars.yml
 
 bugfixes:
-  - host_group_vars - fixed an issue where the 'key' variable could be undefined or retain stale value from previous entity when cache is disabled (https://github.com/ansible/ansible/issues/84384)
+  - host_group_vars - fixed defining the 'key' variable if the get_vars method is called with cache=False (https://github.com/ansible/ansible/issues/84384)
